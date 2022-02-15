@@ -96,10 +96,16 @@ function App() {
                     <td>{year}</td>
                     <td>
                       <button
+                        className="btn btn-warning me-3"
+                        // onClick={() => updateMovie(id)}
+                      >
+                        Update (in progress)
+                      </button>
+                      <button
                         className="btn btn-danger"
                         onClick={() => deleteMovie(id)}
                       >
-                        X
+                        Delete
                       </button>
                     </td>
                   </tr>
