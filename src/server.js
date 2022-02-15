@@ -12,7 +12,7 @@ createServer({
 
     this.get("/movies", () => {
       return {
-        movies
+        movies,
         // movies: [
         //   { id: 1, name: "Please", year: 2010 },
         //   { id: 2, name: "Help", year: 2014 },
@@ -28,6 +28,14 @@ createServer({
       movies.push(attrs);
 
       return { movie: attrs };
+    });
+
+    // Using the `Response` class to return a 500
+    this.delete("/movies/:id", () => {
+      let headers = {};
+      let data = { errors: ["Server did not respond"] };
+
+      return new Response(500, headers, data);
     });
   },
 });

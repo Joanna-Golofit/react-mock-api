@@ -3,9 +3,8 @@ import { useState } from "react";
 
 function App() {
   const [movies, setMovies] = useState(null);
-  const [name, setName] = useState("")
-  const [year, setYear] = useState("")
-
+  const [name, setName] = useState("");
+  const [year, setYear] = useState("");
 
   useEffect(() => {
     fetch("/api/movies")
@@ -22,22 +21,28 @@ function App() {
     e.preventDefault();
     try {
       //wysylam do serwera
-      const res = await fetch("/api/movies", { method: "POST", body: JSON.stringify({ name, year }) });
+      const res = await fetch("/api/movies", {
+        method: "POST",
+        body: JSON.stringify({ name, year }),
+      });
       const json = await res.json();
-      console.log("json back", json)
+      console.log("json back", json);
       setMovies([...movies, json.movie]);
       setName("");
       setYear("");
-
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log("post err:", err);
     }
-  }
+  };
 
-  // const  = (e) => {
-  //   console.log("hej")
-  //   setMovies(...movies, name, year);
-  // }
+  const deleteMovie = async (id) => {
+    try {
+      await fetch(`/api/movies/${id}`, { method: "DELETE" });
+      setMovies(movies.filter((movie) => movie.id !== id));
+    } catch (err) {
+      console.log("delete err:", err);
+    }
+  };
 
   return (
     <div className="container">
@@ -80,6 +85,7 @@ function App() {
                   <th>Id</th>
                   <th>Name</th>
                   <th>Year</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,6 +94,14 @@ function App() {
                     <td>{id}</td>
                     <td>{name}</td>
                     <td>{year}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteMovie(id)}
+                      >
+                        X
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
