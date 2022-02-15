@@ -5,6 +5,9 @@ https://www.youtube.com/watch?v=Xw3K6Kk5Npw&ab_channel=Classsed
 ## Available Scripts
 
 npx create-react-app . --template clean-cra
-npm i miragejs -D
+
+npm i miragejs -D              // serwer
+
 npm install bootstrap
 
+import 'bootstrap/dist/css/bootstrap.min.css';

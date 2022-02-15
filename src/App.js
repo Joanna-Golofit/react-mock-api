@@ -9,7 +9,8 @@ function App() {
       .then((json) => {
         setMovies(json.movies);
         console.log("json.movies:", json.movies);
-      console.log("json:", json)})
+        console.log("json:", json);
+      })
       // .then(console.log(movies))
       // .then(console.log("muvisy:", json))
       .catch((err) => console.log(err.message));
@@ -17,20 +18,38 @@ function App() {
 
   return (
     <div className="container">
-      <div className="row justify-contetn-center">
+      <div className="row justify-content-center">
         <div className="col">
+          <h1 className="text-center my-3">Movies</h1>
           {movies?.length > 0 ? (
-            movies.map((movie) => (
-              <p key={movie.id}>
-                {movie.name} in {movie.year}
-              </p>
-            ))
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                {movies.map(({ id, name, year }) => (
+                  <tr key={id}>
+                    <td>{id}</td>
+                    <td>{name}</td>
+                    <td>{year}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           ) : (
+            // <p key={movie.id}>
+            //   {movie.name} in {movie.year}
+            // </p>
+
             <p>nie ma filmow</p>
           )}
         </div>
       </div>
-      Hello World
+      <p>Cheers World!</p>
     </div>
   );
 }
