@@ -25,6 +25,7 @@ createServer({
     this.post("/movies", (schema, request) => {
       let attrs = JSON.parse(request.requestBody);
       attrs.id = Math.floor(Math.random() * 100);
+      movies.push(attrs);
 
       return { movie: attrs };
     });
